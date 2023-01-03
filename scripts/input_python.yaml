@@ -1,0 +1,5 @@
+Level0: "data/Level0/"
+Level1: "data/Level1/"
+# Processing directory used to temporarily store files during Level 0 --> Level 1 processing
+Process: "data/Unprocessed/"
+Notes: "notes/"
