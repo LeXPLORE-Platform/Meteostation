@@ -5,7 +5,7 @@ import argparse
 from subprocess import check_output, Popen, PIPE
 
 
-def upload_remote_data(warnings=True, delete=False):
+def upload_remote_data(warning=True, delete=False):
     hosts = ["renkulab.io", "github.com", "gitlab.com"]
     folder = os.path.abspath(os.path.join(os.path.dirname(sys.argv[0]), ".."))
     bucket_file = os.path.join(folder, ".bucket")
@@ -20,7 +20,7 @@ def upload_remote_data(warnings=True, delete=False):
     group = remote[1].split("/")[0]
     repository = remote[1].split("/")[1]
 
-    if warnings and host not in hosts:
+    if warning and host not in hosts:
         raise ValueError("Host {} not recognised. Please select from {} or edit the function to accept your host."
                          .format(host, ", ".join(hosts)))
 
@@ -32,7 +32,7 @@ def upload_remote_data(warnings=True, delete=False):
 
     print("Attempting to sync {} with {}".format(data_folder, bucket_uri))
 
-    if warnings:
+    if warning:
         dry_run = check_output(["aws", "s3", "sync", data_folder, bucket_uri, "--dryrun"]).decode('ASCII')
         if len(dry_run) == 0:
             print("{} is up to date.".format(bucket_uri))
@@ -58,4 +58,8 @@ def upload_remote_data(warnings=True, delete=False):
 
 
 if __name__ == "__main__":
-    upload_remote_data()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--warning', '-w', help="Remove change warning for automation.", action='store_false')
+    parser.add_argument('--delete', '-d', help="Delete files for full sync.", action='store_true')
+    args = vars(parser.parse_args())
+    upload_remote_data(warning=args["warning"], delete=args["warning"])
