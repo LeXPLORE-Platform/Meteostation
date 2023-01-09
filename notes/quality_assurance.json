@@ -1,1 +1,13 @@
-{"time": {"simple": {"numeric": "True", "bounds": [1514764800, "now"]}, "advanced": {}}, "Batt": {"simple": {"numeric": "True"}, "advanced": {}}, "Ptemp": {"simple": {"numeric": "True"}, "advanced": {}}, "AirTC": {"simple": {"numeric": "True", "bounds": [-20, 50]}, "advanced": {}}, "RH": {"simple": {"numeric": "True"}, "advanced": {}}, "Slrw": {"simple": {"numeric": "True"}, "advanced": {}}, "Slrm": {"simple": {"numeric": "True"}, "advanced": {}}, "WS": {"simple": {"numeric": "True", "bounds": [0, "inf"]}, "advanced": {}}, "WindDir": {"simple": {"numeric": "True", "bounds": [0, 360]}, "advanced": {}}, "Rain": {"simple": {"numeric": "True", "bounds": [0, "inf"]}, "advanced": {}}, "BP": {"simple": {"numeric": "True", "bounds": [800, 1200]}, "advanced": {}}}
+{
+  "time": {"simple": {"numeric": "True", "bounds": [1514764800, "now"]}, "advanced": {}},
+  "Batt": {"simple": {"numeric": "True", "bounds": [5, 15]}, "advanced": {}},
+  "Ptemp": {"simple": {"numeric": "True", "bounds": [-5, 50]}, "advanced": {}},
+  "AirTC": {"simple": {"numeric": "True", "bounds": [-20, 50]}, "advanced": {}},
+  "RH": {"simple": {"numeric": "True", "bounds": [0, 120]}, "advanced": {}},
+  "Slrw": {"simple": {"numeric": "True", "bounds": [0, 1200]}, "advanced": {}},
+  "Slrm": {"simple": {"numeric": "True", "bounds": [0, 1]}, "advanced": {}},
+  "WS": {"simple": {"numeric": "True", "bounds": [0, 30]}, "advanced": {}},
+  "WindDir": {"simple": {"numeric": "True", "bounds": [0, 360]}, "advanced": {}},
+  "Rain": {"simple": {"numeric": "True", "bounds": [0, 200]}, "advanced": {}},
+  "BP": {"simple": {"numeric": "True", "bounds": [800, 1200]}, "advanced": {}}
+}

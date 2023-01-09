@@ -3,7 +3,7 @@ import os
 import sys
 import yaml
 from instruments import Meteostation
-from general.functions import logger, files_in_directory
+from general.functions import logger, maintenance
 
 log = logger("scripts/logs/meteostation")
 log.initialise("Processing LéXPLORE meteostation data")
@@ -21,7 +21,6 @@ if len(sys.argv) == 1:
     files = os.listdir(directories["Level0"])
     files = [os.path.join(directories["Level0"], f) for f in files]
     files.sort()
-
     log.info("Reprocessing complete dataset from {}".format(directories["Level0"]))
 elif len(sys.argv) == 2:
     live = True
@@ -40,4 +39,8 @@ for file in files:
                 post_process(file, directories["Level0"])
             sensor.quality_assurance(file_path="notes/quality_assurance.json")
             sensor.export(directories["Level1"], "L1_Meteostation", output_period="weekly")
+log.end_stage()
+
+log.begin_stage("Applying Maintenance Periods")
+effected_files = maintenance(directories["Level1"], file="notes/events.csv", datalakes=[459])
 log.end_stage()

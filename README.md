@@ -1,57 +1,83 @@
-# Project Name
-Project Description
+# LéXPLORE Meteostation
 
-<span style="color:red">UPDATE THIS README WITH INFORMATION APPROPRIATE TO YOUR PROJECT!</span>
 
-## Project Information
+## Project Information / Abstract
 
-***
-Include here a description of the project, this could include:
-- Research objective
-- Location
-- Funding
-- References
-- Image of setup
-***
+[LéXPLORE](https://lexplore.info) is research platform on Lake Geneva for a broad range of limnological research. The platform results from a collaboration between five partner institutions ([Eawag](https://www.eawag.ch/en/), [EPFL](https://www.epfl.ch/en/), [INRAE](https://www6.lyon-grenoble.inrae.fr/carrtel/), [UNIGE](https://unige.ch), [UNIL](https://www.unil.ch/index.html)). The LéXPLORE platform is anchored since February 2019 at a position reaching 110 m depth off the lake's north-shore.
+The data presented here is part of the core dataset maintained by the technical team of LéXPLORE.
+The data is used and displayed on the [Datalakes website](https://www.datalakes-eawag.ch/). related data or products can be visualised and downloaded on the [Datalakes website](https://www.datalakes-eawag.ch/).
 
-## Citation
 
-*** 
-Include here a citation for the data such that other can use your data and cite it appropriately. 
-***
+### References
+
+Wüest, A., Bouffard, D., Guillard, J., Ibelings, B. W., Lavanchy, S., Perga, M. ‐E., & Pasche, N. (2021). LéXPLORE: a floating laboratory on Lake Geneva offering unique lake research opportunities. Wiley Interdisciplinary Reviews: Water, 8(5), e1544 (15 pp.). https://doi.org/10.1002/wat2.1544
+
+See also the [360° virtual tour](https://www.eawag.ch/repository/lexplore/index.htm)
+
+### Citation
+Bouffard, D., Ballu, A., Cunillera, G., Fillion, R., Gios, M., Guillard, J., Ibelings, B., Lavanchy, S., Miesen, F., Pasche, N., Perga, M-E., Plüss, M., Quetin, P., Runnalls, J., Wüest, A. (2022). Data and products from LéXPLORE Meteorological station, 2019 - 2022. DOI
+
+DOI attribution pending.
+
+
+### Time Frame
+- Begin date: 29-07-2019
+- End data: continuous data set - live
+
+### Geographic coverage
+Lake Geneva [46.50, 6.66]
+
 
 ## Sensors
-
-***
-Include here a description of the sensors used in your project.
-
-This could look like the following:
 
 The meteostation is a weather station collecting a wide range of meteorological data. Every 10 minutes it measures wind speed, wind direction, amount of rainfall, air pressure, temperature and solar irradiance. The meteorological mast is located above the LéXPLORE platform at 5 m height from the platform (46°30’0.819″ N, 6°39’39.007″ E) 
 
 ### Air temperature
 - **Brand, Model & SN**: Rotronics, HC2S3-L, SN 0020073077
-- **System integration**: Campbell Scientific CR1000X
-- **Accuracy**: +/- 0.01degC
-- **Setup**: Height above lake: 5 m, sampling period: 10 min
+- **System integration**: Campbell Scientific CR1000X SN 25713
+- **Accuracy**: ±0.1 °C @ 23°C
+- **Setup** height above lake: 5 m, sampling period: 10 min
 
 ### Relative humidity
 - **Brand, Model & SN**: Rotronics, HC2S3-L, SN 0020073077
-- **System integration**: Campbell Scientific CR1000X
-- **Accuracy**: +/- 0.01%
-- **Setup**: Height above lake: 5 m, sampling period: 10 min
+- **System integration**: Campbell Scientific CR1000X SN 25713
+- **Accuracy**: ±0.8% RH @ 23°C 
+- **Setup** height above lake: 5 m, sampling period: 10 min
 
-***
+### Wind speed & direction
+- **Brand, Model & SN**: RM Young, 05103, SN WM150350
+- **System integration**: Campbell Scientific CR1000X SN 25713
+- **Accuracy**: Wind speed: ± 0.3 m/s (0.6 mph) or 1% of reading, Wind direction: ± 3°
+- **Setup** height above lake: 5 m, sampling period: 10 min
 
-## Installation
+### Barometric pressure
+- **Brand, Model & SN**: Sestra, CS100-278, SN 
+- **System integration**: Campbell Scientific CR1000X SN 25713
+- **Accuracy**: ±0.5 hPa (@ +20°C), ±1.0 hPa (@ 0° to 40°C) 
+- **Setup** height above lake: 5 m, sampling period: 10 min
 
-**You need to have [git](https://git-scm.com/downloads) and [git-lfs](https://git-lfs.github.com/) installed in order to successfully clone the repository.**
+### Rainfall
+- **Brand, Model & SN**: EML, ARG100, SN 164110, or EML, ARG314, SN 222319(see `sensor_history`)
+- **System integration**: Campbell Scientific CR1000X SN 25713
+- **Accuracy**: +/- 3% up to 120mm/hr 
+- **Setup** height above lake: 5 m, sampling period: 10 min
 
-- Clone the repository to your local machine using the command:
+### Solar radiation
+- **Brand, Model & SN**: Apogee, SP-110, SN 54369
+- **System integration**: Campbell Scientific CR1000X SN 25713
+- **Accuracy**: ±5% for daily total radiation
+- **Setup** height above lake: 5 m, sampling period: 10 min
 
-<span style="color:red">REPLACE WITH LINK TO YOUR REPOSITORY</span>
 
- `git clone --depth 1 https://renkulab.io/gitlab/lexplore/meteostation.git`
+## Code
+
+[![License: MIT][mit-by-shield]][mit-by]
+
+**You need to have [git](https://git-scm.com/downloads) installed in order to successfully clone the repository.**
+
+- Clone the repository to your local machine using the command: 
+
+ `git clone https://renkulab.io/gitlab/lexplore/meteostation.git`
  
  Note that the repository will be copied to your current working directory.
 
@@ -61,65 +87,68 @@ The meteostation is a weather station collecting a wide range of meteorological 
 
  The python version can be checked by running the command `python --version`. In case python is not installed or only an older version of it, it is recommend to install python through the anaconda distribution which can be downloaded [here](https://www.anaconda.com/products/individual). 
 
-## Code
+## Usage
 
-[![License: MIT][mit-by-shield]][mit-by]
+### Process new data
 
-### Processing Data
+In order to process new data locally on your machine the file path needs to be adapted to your local file system. The following steps are therefore necessary: 
 
-***
-Describe here how someone (maybe you in the future) could use the pipeline to process new data in the future.
+- Edit the `scripts/input_batch.bat` file. Change all the directory paths to match your local file system. This file contains all the file paths necessary to launch the batch scripts `runfile.bat`.
 
-This could look like:
+- Edit the `scripts/input_python.py` file. Change all the directory paths to match your local file system. This file contains all the directories where the python script outputs data to.
 
-1. Copy raw data to the `data/Level0` folder.
-2. Edit `scripts/input_python.yaml` to identify directories on local machine.
-3. Use requirements.txt to build a python virtual environment and activate it.
-4. Run `scripts/main.py` to process all data in the `data/Level0` folder.
-***
+To process new data, place the data in the input directory which you specified in the `scripts/input_batch.bat` file. Double-clicking on the `runfile.bat` file will automaticall process all the data in the input directory and store the output in the directories specified in the `scripts/input_python.py` file.
 
-### Adapting Code
+### Adapt/Extend data processing piepeline
 
-***
-Provide a description on another user could edit your code to add functionality or apply it to an additional use case.
-***
+The python script `scripts/main_meteostation.py` defines the different processing steps while the python script `scripts/meteostation.py` contains the python class meteostation with all the corresponding class methods to process the data. To add a new processing or visualization step, a new class method can be created in the `meteostation.py` file and the step can be added in `main_meteostation.py` file. Both above mentioned python scripts are independent of the local file system.
+
 ## Data
 
-[![CC BY 4.0][cc-by-shield]][cc-by]
+### Access
 
-***
+Data for this repository is stored in a remote object store. In order to work with the data you need 
+to run `scripts/download_remote_data.py`, this will syncronise the local `data` folder with the remote 
+data folder on the server. 
+
+### License
+
+[![CC BY 4.0][cc-by-shield]][cc-by] 
+
 This data is released under the Creative Commons license - Attribution - CC BY (https://creativecommons.org/licenses/by/4.0/). This license states that consumers ("Data Users" herein) may distribute, adapt, reuse, remix, and build upon this work, as long as they give appropriate credit, provide a link to the license, and indicate if changes were made.
  
 The Data User has an ethical obligation to cite the data source (see the DOI number) in any publication or product that results from its use. Communication, collaboration, or co-authorship (as appropriate) with the creators of this data package is encouraged. 
  
 Extensive efforts are made to ensure that online data are accurate and up to date, but the authors will not take responsibility for any errors that may exist in data provided online. Furthermore, the Data User assumes all responsibility for errors in analysis or judgment resulting from use of the data. The Data User is urged to contact the authors of the data if any questions about methodology or results occur. 
-***
 
-The data can be found in the folder `data`. The data is structured as follows:
+
 
 ### Data Structure
 
+The data can be found in the folder `data`. The data is structured as follows:
+
 - **Level 0**: Raw data collected from the different sensors.
-
-- **Level 1**: Raw data stored to NetCDF file where attributes (such as sensors used, units, description of data, etc.) are added to the data. 
-Quality assurance is performed on the data and QA masks are generated.
-
-- **Level 2**: Processed data, this could include calculated parameters, transformed units, resampled or gridded data.
+- **Level 1**: Data is converted to NetCDF and quality assurance is applied. Quality flag "1" indicates that the data point didn't pass the 
+quality checks and further investigation is needed, quality flag "0" indicates that the data has passed the quality assurance check. Do not forget to apply the quality check mask when analysing the data.
 
 ## Quality assurance
 
 Quality checks include but are not limited to range validation, data type checking and flagging missing data.
-
+The automatic quality check is controlled by the package [Envass](https://pypi.org/project/envass/). The specific methods implemented for this dataset are listed in `notes/quality_assurance.json`. 
 
 ###  Events 
 
-Maintenance dates, interesting or surprising events, non identified by the quality assurance outliers are listed in the folder `notes`.
+Maintenance dates, interesting or surprising events, non identified by the quality assurance outliers are listed in the folder `notes/events.csv`.
+Check also the `notes/sensor_history.csv` (if existing)
 
 ## Collaborators
 
-***
-List project collaborators
-***
+- **Concept, finances, project management** Damien Bouffard, Jean Guillard, Bas Ibelings, Natacha Pasche, Marie-Elodie Perga, Alfred Wüest   
+- **Installation, maintenance, data collection** Aurélien Ballu, Guillaume Cunillera, Roxane Fillion, Matteo Gios, Sébastien Lavanchy, Floreana Miesen, Michael Plüss, Philippe Quetin 
+- **Data pipeline** James Runnalls
+- **Data review** Damien Bouffard
+- **Contact tech** Sébastien Lavanchy, sebastien.lavanchy@epfl.ch 
+- **Contact science** Damien Bouffard. damien.bouffard@eawag.ch
 
 [cc-by]: http://creativecommons.org/licenses/by/4.0/
 [cc-by-shield]: https://img.shields.io/badge/License-CC%20BY%204.0-g.svg?label=Data%20License

@@ -33,7 +33,10 @@ def upload_remote_data(warning=True, delete=False):
     print("Attempting to sync {} with {}".format(data_folder, bucket_uri))
 
     if warning:
-        dry_run = check_output(["aws", "s3", "sync", data_folder, bucket_uri, "--dryrun"]).decode('ASCII')
+        if delete:
+            dry_run = check_output(["aws", "s3", "sync", data_folder, bucket_uri, "--dryrun", "--delete"]).decode('ASCII')
+        else:
+            dry_run = check_output(["aws", "s3", "sync", data_folder, bucket_uri, "--dryrun"]).decode('ASCII')
         if len(dry_run) == 0:
             print("{} is up to date.".format(bucket_uri))
             return

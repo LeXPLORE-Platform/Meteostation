@@ -12,6 +12,7 @@ from envass import qualityassurance
 from math import sin, cos, sqrt, atan2, radians
 from dateutil.relativedelta import relativedelta
 from datetime import datetime, timedelta, timezone
+import matplotlib.pyplot as plt
 
 
 class GenericInstrument:
@@ -52,7 +53,7 @@ class GenericInstrument:
                         self.data[name] = [1]
                     else:
                         qa = qualityassurance(np.array(self.data[key]), np.array(self.data[time_label]),
-                                                           **quality_assurance_dict[key]["simple"])
+                                              **quality_assurance_dict[key]["simple"])
                         if valid:
                             time = np.array(self.data[time_label])
                             if min(time) < valid[0] < max(time) and min(time) < valid[1] < max(time):
@@ -93,10 +94,12 @@ class GenericInstrument:
             file_start = time_min
             file_period = time_max - time_min
         elif output_period == "daily":
-            file_start = (time_min - timedelta(days=time_min.weekday())).replace(hour=0, minute=0, second=0, microsecond=0)
+            file_start = (time_min - timedelta(days=time_min.weekday())).replace(hour=0, minute=0, second=0,
+                                                                                 microsecond=0)
             file_period = timedelta(days=1)
         elif output_period == "weekly":
-            file_start = (time_min - timedelta(days=time_min.weekday())).replace(hour=0, minute=0, second=0, microsecond=0)
+            file_start = (time_min - timedelta(days=time_min.weekday())).replace(hour=0, minute=0, second=0,
+                                                                                 microsecond=0)
             file_period = timedelta(weeks=1)
         elif output_period == "monthly":
             file_start = time_min.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
@@ -117,7 +120,9 @@ class GenericInstrument:
             filename = "{}_{}.nc".format(title, file_start.strftime('%Y%m%d_%H%M%S'))
             out_file = os.path.join(folder, filename)
             output_files.append(out_file)
-            self.log.info("Writing {} data from {} until {} to NetCDF file {}".format(title, file_start, file_end, filename), indent=2)
+            self.log.info(
+                "Writing {} data from {} until {} to NetCDF file {}".format(title, file_start, file_end, filename),
+                indent=2)
 
             if not os.path.isfile(out_file):
                 self.log.info("Creating new file.", indent=3)
@@ -155,7 +160,8 @@ class GenericInstrument:
                                         elif len(values["dim"]) == 2:
                                             nc.variables[key][:, idx] = data[key]
                                         else:
-                                            self.log.warning("Unable to write {} with {} dimensions.".format(key, len(values["dim"])))
+                                            self.log.warning("Unable to write {} with {} dimensions.".format(key, len(
+                                                values["dim"])))
 
                             else:
                                 self.log.info("Grid data already exists in NetCDF, skipping.", indent=3)
@@ -178,12 +184,14 @@ class GenericInstrument:
                                         else:
                                             var[:, idx] = data[key]
                                     else:
-                                        self.log.warning("Unable to write {} with {} dimensions.".format(key, len(values["dim"])))
+                                        self.log.warning(
+                                            "Unable to write {} with {} dimensions.".format(key, len(values["dim"])))
                     else:
                         if np.all(np.isin(time, nc_time)) and not overwrite:
                             self.log.info("Data already exists in NetCDF, skipping.", indent=3)
                         else:
-                            valid_time = (time >= datetime.timestamp(file_start)) & (time < datetime.timestamp(file_end))
+                            valid_time = (time >= datetime.timestamp(file_start)) & (
+                                        time < datetime.timestamp(file_end))
                             non_duplicates = ~np.isin(time, nc_time)
                             valid = np.logical_and(valid_time, non_duplicates)
                             combined_time = np.append(nc_time, time[valid])
@@ -193,7 +201,8 @@ class GenericInstrument:
                                 combined = np.append(nc_copy[key][:], np.array(data[key])[valid])
                                 if overwrite:
                                     print(len(combined), len(time))
-                                    combined[np.isin(combined_time, time)] = np.array(data[key])[np.isin(time, combined_time)]
+                                    combined[np.isin(combined_time, time)] = np.array(data[key])[
+                                        np.isin(time, combined_time)]
                                 out = combined[order]
                                 nc.variables[key][:] = out
             file_start = file_start + file_period
@@ -222,7 +231,8 @@ class GenericInstrument:
                         data = self.data[values["source"]][mask]
                         self.grid[key] = np.interp([float(values["depth"])], pressures, data, left=np.nan, right=np.nan)
                     else:
-                        self.log.warning('"depth" and "source" keys must be included in self.variables["{}"].'.format(key), indent=2)
+                        self.log.warning(
+                            '"depth" and "source" keys must be included in self.variables["{}"].'.format(key), indent=2)
                 elif len(values["dim"]) == 2:
                     mask = (~np.isnan(self.data[key])) & (~np.isnan(self.data[depth_label]))
                     pressures = self.data[depth_label][mask]
@@ -232,7 +242,8 @@ class GenericInstrument:
                     else:
                         self.grid[key] = np.interp(self.depths, pressures, data, left=np.nan, right=np.nan)
                 else:
-                    self.log.warning("Unable to process data for {} with {} dimensions.".format(key, len(values["dim"])), indent=2)
+                    self.log.warning(
+                        "Unable to process data for {} with {} dimensions.".format(key, len(values["dim"])), indent=2)
 
     def read_netcdf_data(self, file):
         with netCDF4.Dataset(file, 'r') as nc:
@@ -250,7 +261,8 @@ class logger(object):
                 else:
                     self.path = "{}.log".format(path.split(".")[0])
             else:
-                print("\033[93mUnable to find log folder: {}. Logs will be printed but not saved.\033[0m".format(os.path.dirname(path)))
+                print("\033[93mUnable to find log folder: {}. Logs will be printed but not saved.\033[0m".format(
+                    os.path.dirname(path)))
                 self.path = False
         else:
             self.path = False
@@ -339,7 +351,70 @@ class logger(object):
                 file.write("\n")
 
 
-def timeseries_quality_assurance(folder, period=365, time_label="time", datalakes=[], json_path="quality_assurance.json",
+def in_maintenance_periods(start, end, periods):
+    for period in periods:
+        if ~(start > period["stop"] or end < period["start"]):
+            return True
+    return False
+
+
+def maintenance(folder, file=False, datalakes=[], periods=[], time_label="time"):
+    if file:
+        print("Processing maintenance periods from {}".format(file))
+        df = pd.read_csv(file, sep=";")
+        df["start"] = df["start"].apply(
+            lambda x: datetime.timestamp(datetime.strptime(x, '%Y%m%d %H:%M:%S').replace(tzinfo=timezone.utc)))
+        df["stop"] = df["stop"].apply(
+            lambda x: datetime.timestamp(datetime.strptime(x, '%Y%m%d %H:%M:%S').replace(tzinfo=timezone.utc)))
+        for d in df.to_dict('records'):
+            periods.append(d)
+
+    if len(datalakes) > 0:
+        print("Processing maintenance periods from Datalakes.")
+        for id in datalakes:
+            r = requests.get('https://api.datalakes-eawag.ch/maintenance/' + str(id))
+            if r.status_code != 200:
+                print("WARNING failed to collect data for Datalakes id: {}".format())
+            else:
+                data = list(r.json())
+                for period in data:
+                    periods.append(
+                        {"start": datetime.strptime(period["starttime"], '%Y-%m-%dT%H:%M:%S.%fZ').timestamp(),
+                         "stop": datetime.strptime(period["endtime"], '%Y-%m-%dT%H:%M:%S.%fZ').timestamp(),
+                         "parameter": period["parseparameter"]})
+
+    reprocess = []
+    files = [os.path.join(folder, f) for f in os.listdir(folder)]
+    files.sort()
+    for file in files:
+        nc = netCDF4.Dataset(file, 'r+')
+        time = np.array(nc.variables[time_label][:])
+        start = time.min()
+        stop = time.max()
+        if in_maintenance_periods(start, stop, periods):
+            print("Process: {}".format(file))
+            for period in periods:
+                idx = np.where(np.logical_and(time >= period["start"], time <= period["stop"]))
+                if period["parameter"] == "All":
+                    for var in nc.variables.keys():
+                        if "_qual" in var and time_label not in var:
+                            data = np.array(nc.variables[var][:])
+                            data[idx] = 1
+                            nc.variables[var][:] = data
+                else:
+                    if period["parameter"] + "_qual" in nc.variables.keys():
+                        data = np.array(nc.variables[period["parameter"] + "_qual"][:])
+                        data[idx] = 1
+                        nc.variables[period["parameter"] + "_qual"][:] = data
+                    else:
+                        print("Parameter {} not in file".format(period))
+            reprocess.append(file)
+        nc.close()
+    return reprocess
+
+
+def timeseries_quality_assurance(folder, period=365, time_label="time", datalakes=[],
+                                 json_path="quality_assurance.json",
                                  events="notes/events.csv", log=logger()):
     log.info("Running timeseries quality assurance for {}".format(folder), indent=1)
     files = os.listdir(folder)
@@ -375,7 +450,8 @@ def advanced_quality_flags(ds, json_path, log, time_label="time"):
     quality_assurance_dict = json_converter(json.load(open(json_path)))
     for var in quality_assurance_dict.keys():
         if var in quality_assurance_dict and var in ds and var + "_qual" in ds:
-            simple = qualityassurance(np.array(ds[var]), np.array(ds[time_label]), **quality_assurance_dict[var]["simple"])
+            simple = qualityassurance(np.array(ds[var]), np.array(ds[time_label]),
+                                      **quality_assurance_dict[var]["simple"])
             ds[var + "_qual"][simple > 0] = 1
             data = np.array(ds[var]).copy()
             data[np.array(ds[var + "_qual"].values) > 0] = np.nan
@@ -387,14 +463,18 @@ def advanced_quality_flags(ds, json_path, log, time_label="time"):
 def event_quality_flags(ds, datalakes, events, log, time_label="time"):
     log.info("Applying manual timeseries checks.", indent=2)
     df = pd.read_csv(events, sep=";")
-    df["start"] = df["start"].apply(lambda l: datetime.timestamp(datetime.strptime(l, '%Y%m%d %H:%M:%S').replace(tzinfo=timezone.utc)))
-    df["stop"] = df["stop"].apply(lambda l: datetime.timestamp(datetime.strptime(l, '%Y%m%d %H:%M:%S').replace(tzinfo=timezone.utc)))
+    df["start"] = df["start"].apply(
+        lambda l: datetime.timestamp(datetime.strptime(l, '%Y%m%d %H:%M:%S').replace(tzinfo=timezone.utc)))
+    df["stop"] = df["stop"].apply(
+        lambda l: datetime.timestamp(datetime.strptime(l, '%Y%m%d %H:%M:%S').replace(tzinfo=timezone.utc)))
     for id in datalakes:
-        x = requests.get("https://api.datalakes-eawag.ch/maintenance/"+str(id))
+        x = requests.get("https://api.datalakes-eawag.ch/maintenance/" + str(id))
         if x.status_code == 200:
             for e in x.json():
-                df.loc[len(df)] = [datetime.timestamp(datetime.strptime(e["starttime"], '%Y-%m-%dT%H:%M:%S.%fZ').replace(tzinfo=timezone.utc)),
-                                   datetime.timestamp(datetime.strptime(e["endtime"], '%Y-%m-%dT%H:%M:%S.%fZ').replace(tzinfo=timezone.utc)),
+                df.loc[len(df)] = [datetime.timestamp(
+                    datetime.strptime(e["starttime"], '%Y-%m-%dT%H:%M:%S.%fZ').replace(tzinfo=timezone.utc)),
+                                   datetime.timestamp(datetime.strptime(e["endtime"], '%Y-%m-%dT%H:%M:%S.%fZ').replace(
+                                       tzinfo=timezone.utc)),
                                    e["parseparameter"],
                                    e["description"]]
 
