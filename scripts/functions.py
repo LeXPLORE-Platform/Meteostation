@@ -12,7 +12,7 @@ from datetime import datetime, timedelta
 from math import sin, cos, sqrt, atan2, radians
 from dateutil.relativedelta import relativedelta
 from envass import qualityassurance
-from general_functions import logger
+from general.functions import logger
 
 
 def pre_process(file, Level0_dir, process_dir):
@@ -42,7 +42,7 @@ def post_process(file, Level0_dir):
     if os.path.isfile(file):
         move(file, Level0_dir)
     else:
-        log("Error, file does not exist")
+        log.info("Error, file does not exist")
 
 
 def retrieve_new_files(folder, creds, server_location="data", log=logger()):

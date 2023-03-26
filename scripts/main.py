@@ -43,5 +43,5 @@ for file in files:
 log.end_stage()
 
 log.begin_stage("Applying Maintenance Periods")
-effected_files = maintenance(directories["Level1"], file="notes/events.csv", datalakes=[459])
+# effected_files = maintenance(directories["Level1"], file="notes/events.csv", datalakes=[459])
 log.end_stage()

@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime, timedelta, timezone
-from general.functions import GenericInstrument, ctd_parse_metadata, first_centered_differences
+from general.functions import GenericInstrument
 
 
 class Meteostation(GenericInstrument):
