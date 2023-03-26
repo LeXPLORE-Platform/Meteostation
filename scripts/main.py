@@ -4,6 +4,7 @@ import sys
 import yaml
 from instruments import Meteostation
 from general.functions import logger, maintenance
+from functions import pre_process, post_process
 
 log = logger("scripts/logs/meteostation")
 log.initialise("Processing LéXPLORE meteostation data")
@@ -25,7 +26,7 @@ if len(sys.argv) == 1:
 elif len(sys.argv) == 2:
     live = True
     files = [str(sys.argv[1]).replace('\\', '/')]
-    log("Live processing file {}".format(files[0]))
+    log.info("Live processing file {}".format(files[0]))
 log.end_stage()
 
 log.begin_stage("Processing data to L1")

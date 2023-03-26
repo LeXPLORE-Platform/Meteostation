@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 SET home="C:\Users\Seatronic 1147\Documents\Data_Lexplore\git\meteostation"
-SET pythonenv="C:\Users\Seatronic 1147\Documents\Data_Lexplore\git\venv\Scripts\python.exe"
+SET pythonenv="C:\Users\Seatronic 1147\Documents\Data_Lexplore\git\venv39\Scripts\python"
 SET script="C:\Users\Seatronic 1147\Documents\Data_Lexplore\git\meteostation\scripts\main.py"
 SET in="C:\Users\Seatronic 1147\Documents\Data_Lexplore\WeatherStation"
 SET backup="C:\Users\Seatronic 1147\Documents\Data_Lexplore\WeatherStationBackup"

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+import pytz
 import copy
 import json
 import netCDF4
@@ -77,8 +78,8 @@ class GenericInstrument:
                 self.data[key][bottom_of_profile_index:] = 1
                 self.data[key][:water_entry_index] = 1
 
-    def export(self, folder, title, output_period="file", time_label="time", grid=False, overwrite=False):
-        if grid:
+    def export(self, folder, title, output_period="file", time_label="time", profile_to_grid=False, overwrite=False):
+        if profile_to_grid:
             variables = self.grid_variables
             dimensions = self.grid_dimensions
             data = self.grid
@@ -88,18 +89,16 @@ class GenericInstrument:
             data = self.data
 
         time = data[time_label]
-        time_min = datetime.utcfromtimestamp(np.nanmin(time))
-        time_max = datetime.utcfromtimestamp(np.nanmax(time))
+        time_min = datetime.utcfromtimestamp(np.nanmin(time)).replace(tzinfo=pytz.utc)
+        time_max = datetime.utcfromtimestamp(np.nanmax(time)).replace(tzinfo=pytz.utc)
         if output_period == "file":
             file_start = time_min
             file_period = time_max - time_min
         elif output_period == "daily":
-            file_start = (time_min - timedelta(days=time_min.weekday())).replace(hour=0, minute=0, second=0,
-                                                                                 microsecond=0)
+            file_start = (time_min - timedelta(days=time_min.weekday())).replace(hour=0, minute=0, second=0, microsecond=0)
             file_period = timedelta(days=1)
         elif output_period == "weekly":
-            file_start = (time_min - timedelta(days=time_min.weekday())).replace(hour=0, minute=0, second=0,
-                                                                                 microsecond=0)
+            file_start = (time_min - timedelta(days=time_min.weekday())).replace(hour=0, minute=0, second=0, microsecond=0)
             file_period = timedelta(weeks=1)
         elif output_period == "monthly":
             file_start = time_min.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
@@ -124,6 +123,8 @@ class GenericInstrument:
                 "Writing {} data from {} until {} to NetCDF file {}".format(title, file_start, file_end, filename),
                 indent=2)
 
+            valid_time = (time >= datetime.timestamp(file_start)) & (time <= datetime.timestamp(file_end))
+
             if not os.path.isfile(out_file):
                 self.log.info("Creating new file.", indent=3)
                 with netCDF4.Dataset(out_file, mode='w', format='NETCDF4') as nc:
@@ -135,17 +136,33 @@ class GenericInstrument:
                         var = nc.createVariable(values["var_name"], np.float64, values["dim"], fill_value=np.nan)
                         var.units = values["unit"]
                         var.long_name = values["long_name"]
-                        if grid and key == time_label:
+                        if profile_to_grid and key == time_label:
                             var[0] = time[0]
-                        elif grid and len(values["dim"]) == 2:
-                            var[:, 0] = data[key]
+                        elif profile_to_grid and len(values["dim"]) == 2:
+                            if values["dim"][0] == time_label:
+                                var[0, :] = data[key]
+                            elif values["dim"][1] == time_label:
+                                var[:, 0] = data[key]
+                            else:
+                                raise ValueError("Failed to write variable {} with dimensions: {} to file".format(key, ", ".join(values["dim"])))
                         else:
-                            var[:] = data[key]
+                            if len(values["dim"]) == 1:
+                                if values["dim"][0] == time_label:
+                                    var[:] = data[key][valid_time]
+                                else:
+                                    var[:] = data[key]
+                            elif len(values["dim"]) == 2:
+                                if values["dim"][0] == time_label:
+                                    var[:] = data[key][valid_time, :]
+                                elif values["dim"][1] == time_label:
+                                    var[:] = data[key][:, valid_time]
+                            else:
+                                raise ValueError("Failed to write variable {} with dimensions: {} to file".format(key, ", ".join(values["dim"])))
             else:
                 self.log.info("Editing existing file.", indent=3)
                 with netCDF4.Dataset(out_file, mode='a', format='NETCDF4') as nc:
                     nc_time = np.array(nc.variables[time_label][:])
-                    if grid:
+                    if profile_to_grid:
                         if time[0] in nc_time:
                             if overwrite:
                                 self.log.info("Overwriting data at {}.".format(time[0]), indent=3)
@@ -157,7 +174,7 @@ class GenericInstrument:
                                                 nc.variables[key][idx] = data[key][0]
                                             else:
                                                 nc.variables[key][idx] = data[key]
-                                        elif len(values["dim"]) == 2:
+                                        elif len(values["dim"]) == 2 and values["dim"][1] == time_label:
                                             nc.variables[key][:, idx] = data[key]
                                         else:
                                             self.log.warning("Unable to write {} with {} dimensions.".format(key, len(
@@ -176,7 +193,7 @@ class GenericInstrument:
                                             var[idx] = data[key][0]
                                         else:
                                             var[idx] = data[key]
-                                    elif len(values["dim"]) == 2:
+                                    elif len(values["dim"]) == 2 and values["dim"][1] == time_label:
                                         end = len(var[:][0]) - 1
                                         if idx != end:
                                             var[:, end] = data[key]
@@ -190,21 +207,29 @@ class GenericInstrument:
                         if np.all(np.isin(time, nc_time)) and not overwrite:
                             self.log.info("Data already exists in NetCDF, skipping.", indent=3)
                         else:
-                            valid_time = (time >= datetime.timestamp(file_start)) & (
-                                        time < datetime.timestamp(file_end))
                             non_duplicates = ~np.isin(time, nc_time)
                             valid = np.logical_and(valid_time, non_duplicates)
                             combined_time = np.append(nc_time, time[valid])
                             order = np.argsort(combined_time)
                             nc_copy = copy_variables(nc.variables)
                             for key, values in self.variables.items():
-                                combined = np.append(nc_copy[key][:], np.array(data[key])[valid])
-                                if overwrite:
-                                    print(len(combined), len(time))
-                                    combined[np.isin(combined_time, time)] = np.array(data[key])[
-                                        np.isin(time, combined_time)]
-                                out = combined[order]
-                                nc.variables[key][:] = out
+                                if time_label in values["dim"]:
+                                    if len(values["dim"]) == 1:
+                                        combined = np.append(nc_copy[key][:], np.array(data[key])[valid])
+                                        if overwrite:
+                                            combined[np.isin(combined_time, time)] = np.array(data[key])[
+                                                np.isin(time, combined_time)]
+                                        out = combined[order]
+                                    elif len(values["dim"]) == 2 and values["dim"][1] == time_label:
+                                        combined = np.concatenate((np.array(nc_copy[key][:]), np.array(data[key])[:, valid]), axis=1)
+                                        if overwrite:
+                                            combined[:, np.isin(combined_time, time)] = np.array(data[key])[:, np.isin(time, combined_time)]
+                                        out = combined[:, order]
+                                    else:
+                                        raise ValueError(
+                                            "Failed to write variable {} with dimensions: {} to file"
+                                            .format(key, ", ".join(values["dim"])))
+                                    nc.variables[key][:] = out
             file_start = file_start + file_period
         return output_files
 
@@ -221,7 +246,7 @@ class GenericInstrument:
             self.grid[depth_label] = self.depths
         except:
             raise ValueError("self.depths must be defined as an fixed array of depths to produce timeseries grid.")
-        self.grid[time_label] = [self.data[time_label][0]]
+        self.grid[time_label] = np.array([self.data[time_label][0]])
         for key, values in self.grid_variables.items():
             if key not in self.grid_dimensions:
                 if len(values["dim"]) == 1:
@@ -383,11 +408,15 @@ def maintenance(folder, file=False, datalakes=[], periods=[], time_label="time")
                          "stop": datetime.strptime(period["endtime"], '%Y-%m-%dT%H:%M:%S.%fZ').timestamp(),
                          "parameter": period["parseparameter"]})
 
+    if len(periods) == 0:
+        return []
+
     reprocess = []
     files = [os.path.join(folder, f) for f in os.listdir(folder)]
     files.sort()
     for file in files:
-        nc = netCDF4.Dataset(file, 'r+')
+        writable = False
+        nc = netCDF4.Dataset(file, 'r')
         time = np.array(nc.variables[time_label][:])
         start = time.min()
         stop = time.max()
@@ -399,13 +428,45 @@ def maintenance(folder, file=False, datalakes=[], periods=[], time_label="time")
                     for var in nc.variables.keys():
                         if "_qual" in var and time_label not in var:
                             data = np.array(nc.variables[var][:])
-                            data[idx] = 1
-                            nc.variables[var][:] = data
+                            if len(data.shape) == 1:
+                                if not np.all(data[idx] == 1):
+                                    if not writable:
+                                        writable = True
+                                        nc.close()
+                                        nc = netCDF4.Dataset(file, 'r+')
+                                        data = np.array(nc.variables[var][:])
+                                    data[idx] = 1
+                                    nc.variables[var][:] = data
+                            elif len(data.shape) == 2:
+                                if not np.all(data[:, idx] == 1):
+                                    if not writable:
+                                        writable = True
+                                        nc.close()
+                                        nc = netCDF4.Dataset(file, 'r+')
+                                        data = np.array(nc.variables[var][:])
+                                    data[:, idx] = 1
+                                    nc.variables[var][:] = data
                 else:
                     if period["parameter"] + "_qual" in nc.variables.keys():
                         data = np.array(nc.variables[period["parameter"] + "_qual"][:])
-                        data[idx] = 1
-                        nc.variables[period["parameter"] + "_qual"][:] = data
+                        if len(data.shape) == 1:
+                            if not np.all(data[idx] == 1):
+                                if not writable:
+                                    writable = True
+                                    nc.close()
+                                    nc = netCDF4.Dataset(file, 'r+')
+                                    data = np.array(nc.variables[var][:])
+                                data[idx] = 1
+                                nc.variables[period["parameter"] + "_qual"][:] = data
+                        elif len(data.shape) == 2:
+                            if not np.all(data[:, idx] == 1):
+                                if not writable:
+                                    writable = True
+                                    nc.close()
+                                    nc = netCDF4.Dataset(file, 'r+')
+                                    data = np.array(nc.variables[var][:])
+                                data[:, idx] = 1
+                                nc.variables[period["parameter"] + "_qual"][:] = data
                     else:
                         print("Parameter {} not in file".format(period))
             reprocess.append(file)
@@ -543,31 +604,6 @@ def files_in_directory(root):
         for name in files:
             f.append(os.path.join(path, name))
     return f
-
-
-def ctd_parse_metadata(file):
-    metadata = {}
-    with open(file, encoding="utf8", errors='ignore') as f:
-        lines = f.readlines()
-    parse = False
-    for i in range(len(lines)):
-        if "METADATA;" in lines[i]:
-            parse = True
-        elif "**********" in lines[i]:
-            parse = False
-        elif parse:
-            d = str(lines[i]).replace(";", "").split(":")
-            if "coordinates" in d[0].lower() and "grid" not in d[0].lower():
-                c = d[1].strip().split("/")
-                if float(c[0]) > 2000000:
-                    metadata["latitude"], metadata["longitude"] = ch1903plus_to_latlng(float(c[0]), float(c[1]))
-                elif float(c[0]) > 200:
-                    metadata["latitude"], metadata["longitude"] = ch1903_to_latlng(float(c[0]), float(c[1]))
-                else:
-                    metadata["latitude"] = float(c[0])
-                    metadata["longitude"] = float(c[0])
-            metadata[d[0].replace("/", "")] = d[1].strip()
-    return metadata
 
 
 def latlng_to_ch1903(lat, lng):

@@ -37,14 +37,20 @@ class Meteostation(GenericInstrument):
             'WindDir': {'var_name': 'WindDir', 'dim': ('time',), 'unit': 'deg', 'long_name': 'wind_direction'},
             'Rain': {'var_name': 'Rain', 'dim': ('time',), 'unit': 'mm', 'long_name': 'precipitation_depth'},
             'BP': {'var_name': 'BP', 'dim': ('time',), 'unit': 'mbar', 'long_name': 'barometric_pressure'},
+            'WindGust': {'var_name': 'WindGust', 'dim': ('time',), 'unit': 'm/s', 'long_name': 'wind_gust'},
         }
 
     def read_data(self, file):
         self.log.info("Reading data from {}".format(file), 1)
         try:
             df = pd.read_csv(file, header=None)
-            df.columns = ["time", "Record", "Batt", "Ptemp", "AirTC", "RH", "Slrw", "Slrm", "WS", "WindDir", "Rain",
-                          "BP"]
+            if len(df.columns) == 12:
+                df.columns = ["time", "Record", "Batt", "Ptemp", "AirTC", "RH", "Slrw", "Slrm", "WS", "WindDir", "Rain",
+                              "BP"]
+                df["WindGust"] = np.nan
+            else:
+                df.columns = ["time", "Record", "Batt", "Ptemp", "AirTC", "RH", "Slrw", "Slrm", "WS", "WindDir", "Rain",
+                              "BP", "WindGust"]
             df["time"] = df["time"].apply(
                 lambda x: datetime.timestamp(datetime.strptime(x, '%Y-%m-%d %H:%M:%S').replace(tzinfo=timezone.utc)))
             df.sort_values(by=['time'])

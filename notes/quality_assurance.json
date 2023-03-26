@@ -9,5 +9,6 @@
   "WS": {"simple": {"numeric": "True", "bounds": [0, 30]}, "advanced": {}},
   "WindDir": {"simple": {"numeric": "True", "bounds": [0, 360]}, "advanced": {}},
   "Rain": {"simple": {"numeric": "True", "bounds": [0, 200]}, "advanced": {}},
-  "BP": {"simple": {"numeric": "True", "bounds": [800, 1200]}, "advanced": {}}
+  "BP": {"simple": {"numeric": "True", "bounds": [800, 1200]}, "advanced": {}},
+  "WindGust": {"simple": {"numeric": "True", "bounds": [0, 30]}, "advanced": {}}
 }
