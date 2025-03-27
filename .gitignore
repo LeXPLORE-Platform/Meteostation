@@ -339,7 +339,8 @@ tags
 .renku/cache
 
 # Logs
-
+logs/*
+!logs/.gitkeep
 scripts/logs/*
 !scripts/logs/.gitkeep
 
@@ -349,3 +350,5 @@ data/*
 !data/.gitkeep
 !data/README.md
 !data/.bucket
+
+creds.json

@@ -15,56 +15,53 @@ from envass import qualityassurance
 from general.functions import logger
 
 
-def pre_process(file, Level0_dir, process_dir):
-    for row in open(file, "r"):
-        filename_l = Level0_dir+"/"+"LeXPLORE_WS_Lexplore_Weather_"+row[1:11]+".dat"
-        filename_p = process_dir+"/"+"LeXPLORE_WS_Lexplore_Weather_"+row[1:11]+".dat"
-        if os.path.isfile(filename_l):
-            os.rename(filename_l, filename_p)
-        if os.path.isfile(filename_p):
-            read = open(filename_p, "r")
-            if row in read.readlines():
-                read.close()
-            else:
-                read.close()
-                append = open(filename_p, "a")
-                append.write(row)
-                append.close()
-        else:
-            new = open(filename_p, "w")
-            new.write(row)
-            new.close()
-    os.remove(file)
-    return filename_p
-
-
-def post_process(file, Level0_dir):
-    if os.path.isfile(file):
-        move(file, Level0_dir)
-    else:
-        log.info("Error, file does not exist")
-
-
-def retrieve_new_files(folder, creds, server_location="data", log=logger()):
+def retrieve_new_files(folder, creds, server_location="data", filetype=".csv", remove=False, overwrite=False, log=logger()):
     files = []
     log.info("Connecting to {}.".format(creds["ftp"]), indent=1)
-    ftp = ftplib.FTP(creds["ftp"], creds["user"], creds["password"], timeout=100)
-    server_files = [os.path.join(server_location, f) for f in ftp.nlst(server_location)]
+    ftp = ftplib.FTP(creds["ftp"], timeout=100)
+    ftp.login(creds["user"], creds["password"])
+    server_files = ftp.nlst(server_location)
     local_files = os.listdir(folder)
     for file in server_files:
         file_name = os.path.basename(file)
-        if file_name not in local_files and file.split(".")[-1] == "csv":
+        if file.endswith(filetype) and (overwrite or file_name not in local_files):
             log.info("Downloading file {}".format(file), indent=2)
-            download_file(os.path.join(file), os.path.join(folder, file_name), ftp)
+            download_file(file, os.path.join(folder, file_name), ftp)
+            if remove:
+                ftp.delete(file)
             files.append(os.path.join(folder, file_name))
     files.sort()
-    log.info("{} new files found on the server.".format(len(files)), indent=1)
     return files
 
 
 def download_file(server, local, ftp):
     with open(local, "wb") as f:
         ftp.retrbinary("RETR " + server, f.write)
+
+
+def merge_files(output_folder, new_files):
+    files = []
+    for file in new_files:
+        try:
+            file_name = os.path.basename(file)
+            day_name = file_name[:29] + file_name[29:39].replace("_", "-") + ".dat"
+            day_file = os.path.join(output_folder, day_name)
+            if os.path.isfile(day_file):
+                df1 = pd.read_csv(day_file, header=None)
+                df2 = pd.read_csv(file, header=None)
+                df = pd.concat([df1, df2], ignore_index=True)
+                df = df.drop_duplicates(subset=df.columns[0], keep='last')
+                df = df.sort_values(by=df.columns[0])
+                df.to_csv(day_file, index=False, header=False)
+                os.remove(file)
+            else:
+                os.rename(file, day_file)
+            if day_file not in files:
+                files.append(day_file)
+        except:
+            print("Failed to merge: {}".format(file))
+    files.sort()
+    return files
 
 
 def interp_nan_grid(time, depth, temp, method='linear'):
