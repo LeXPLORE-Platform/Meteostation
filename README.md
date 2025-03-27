@@ -89,19 +89,19 @@ The meteostation is a weather station collecting a wide range of meteorological 
 
 ## Usage
 
-### Process new data
+### Credentials
 
-In order to process new data locally on your machine the file path needs to be adapted to your local file system. The following steps are therefore necessary: 
+In order to download live data `creds_example.json` should be renamed to `creds.json` and completed.
 
-- Edit the `scripts/input_batch.bat` file. Change all the directory paths to match your local file system. This file contains all the file paths necessary to launch the batch scripts `runfile.bat`.
+### Operation
 
-- Edit the `scripts/input_python.py` file. Change all the directory paths to match your local file system. This file contains all the directories where the python script outputs data to.
+To run the pipeline: `python scripts/main.py`
 
-To process new data, place the data in the input directory which you specified in the `scripts/input_batch.bat` file. Double-clicking on the `runfile.bat` file will automaticall process all the data in the input directory and store the output in the directories specified in the `scripts/input_python.py` file.
+The python script `scripts/main.py` defines the different processing steps while the python script `scripts/meteostation.py` contains the python class meteostation with all the corresponding class methods to process the data. To add a new processing or visualization step, a new class method can be created in the `meteostation.py` file and the step can be added in `main.py` file. Both above mentioned python scripts are independent of the local file system.
 
-### Adapt/Extend data processing piepeline
+### Arguments
 
-The python script `scripts/main_meteostation.py` defines the different processing steps while the python script `scripts/meteostation.py` contains the python class meteostation with all the corresponding class methods to process the data. To add a new processing or visualization step, a new class method can be created in the `meteostation.py` file and the step can be added in `main_meteostation.py` file. Both above mentioned python scripts are independent of the local file system.
+Run `scripts/main.py -h` for details on the input arguments available
 
 ## Data
 
