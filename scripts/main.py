@@ -12,9 +12,12 @@ from functions import retrieve_new_files, merge_files
 from download_remote_data import download_remote_data
 from upload_remote_data import upload_files
 
-def main(reprocess=False, initialize=False, download=False, upload=False, datalakes=False):
+def main(reprocess=False, initialize=False, download=False, upload=False, datalakes=False, logs=False):
     repo = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-    log = logger(os.path.join(repo, "logs/meteostation"))
+    if logs:
+        log = logger(os.path.join(repo, "logs/meteostation"))
+    else:
+        log = logger()
     log.initialise("Processing LéXPLORE meteostation data")
     directories = {f: os.path.join(repo, "data", f) for f in ["Level0", "Level1", "failed"]}
     edited_files = []
@@ -76,8 +79,9 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--reprocess', '-r', help="Reprocess complete dataset", action='store_true')
     parser.add_argument('--initialize', '-i', help="Try to download data from remote bucket if no Level0 folder", action='store_true')
+    parser.add_argument('--logs', '-l', help="Write logs to file", action='store_true')
     parser.add_argument('--download', '-d', help="Download sync with remote bucket", action='store_true')
     parser.add_argument('--upload', '-u', help="Upload sync with remote bucket", action='store_true')
     parser.add_argument('--datalakes', '-dl', type=lambda s: list(map(int, s.split(','))) if s else False, nargs="?", const=False, default=False, help="Datalakes ID's to update, or False if not provided.")
     args = vars(parser.parse_args())
-    main(reprocess=args["reprocess"], initialize=args["initialize"], download=args["download"], upload=args["upload"], datalakes=args["datalakes"])
+    main(reprocess=args["reprocess"], initialize=args["initialize"], download=args["download"], upload=args["upload"], datalakes=args["datalakes"], logs=args["logs"])
