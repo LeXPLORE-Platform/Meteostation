@@ -46,7 +46,7 @@ def main(reprocess=False, initialize=False, download=False, upload=False, datala
             raise ValueError("Credential file required to retrieve live data from the fstp server.")
         with open(os.path.join(repo, "creds.json"), 'r') as f:
             creds = json.load(f)
-        new_files = retrieve_new_files(directories["failed"], creds, server_location="data/WeatherStation", filetype=".dat", remove=True, overwrite=True)
+        new_files = retrieve_new_files(directories["failed"], creds, server_location="data/WeatherStation", filetype=".dat", remove=upload, overwrite=True)
         files = merge_files(directories["Level0"], new_files)
         edited_files = edited_files + files
     log.end_stage()
