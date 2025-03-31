@@ -4,4 +4,4 @@
 conda activate lexplore
 git config --global --add safe.directory /repository
 cd /repository
-python -u scripts/main.py "$@"
+python -u scripts/pipeline.py "$@"
