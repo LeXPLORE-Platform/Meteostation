@@ -10,7 +10,7 @@ from instruments import Meteostation
 from general.functions import logger
 from functions import retrieve_new_files, merge_files
 
-def main(server=False, logs=False):
+def main(server=False, logs=False, remove_api_data=False):
     repo = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     if logs:
         log = logger(os.path.join(repo, "logs/meteostation"))
@@ -19,8 +19,7 @@ def main(server=False, logs=False):
     log.initialise("Processing LéXPLORE meteostation data")
     directories = {f: os.path.join(repo, "data", f) for f in ["Level0", "Level1", "failed"]}
     for directory in directories:
-        if not os.path.exists(directories[directory]):
-            os.makedirs(directories[directory])
+        os.makedirs(directories[directory], exist_ok=True)
     edited_files = []
 
     log.begin_stage("Collecting inputs")
@@ -30,7 +29,9 @@ def main(server=False, logs=False):
             raise ValueError("Credential file required to retrieve live data from the fstp server.")
         with open(os.path.join(repo, "creds.json"), 'r') as f:
             creds = json.load(f)
-        new_files = retrieve_new_files(directories["failed"], creds, server_location="data/WeatherStation", filetype=".dat", remove=False, overwrite=True)
+        new_files = retrieve_new_files(directories["failed"],
+                                       creds, server_location="data/WeatherStation",
+                                       filetype=".dat", remove=remove_api_data, overwrite=True)
         files = merge_files(directories["Level0"], new_files)
         edited_files = edited_files + files
     else:
