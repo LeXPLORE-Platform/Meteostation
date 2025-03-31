@@ -70,9 +70,10 @@ def main(reprocess=False, initialize=False, download=False, upload=False, datala
 
     if datalakes:
         log.info("Calling Datalakes API")
-        for datalakes_id in datalakes:
+        for index, datalakes_id in enumerate(datalakes):
             requests.get("https://api.datalakes-eawag.ch/update/{}".format(datalakes_id))
-            time.sleep(30)
+            if index != len(datalakes) - 1:
+                time.sleep(30)
     log.end_stage()
 
 if __name__ == "__main__":
