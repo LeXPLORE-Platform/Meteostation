@@ -1,0 +1,117 @@
+﻿Date;Time (UTC);ID;Type;Parameters;Comments;Operator;Miscellaneous
+09.04.2019;9:30:00;1;Installation;"Weather station;multiparameter;Campbell;WS-A";Physical installation;Sebastien Lavanchy;LéXPLORE_WeatherStation_FactoryCalibration.pdf
+29.07.2019;12:00:00;2;Installation;"Weather station;multiparameter;Campbell;WS-A";Measuring,  on datalakes;Sébastien Lavanchy;
+04.12.2019;10:35:00;3;Maintenance;"Weather station;multiparameter;Campbell;WS-A";Cleaning;Sébastien Lavanchy;
+12.03.2020;10:02:00;4;Maintenance;"Weather station;multiparameter;Campbell;WS-A";Cleaning;Sébastien Lavanchy;
+16.07.2020;10:00:00;5;Maintenance;"Weather station;multiparameter;Campbell;WS-A";Cleaning;Aurélien Ballu;
+08.10.2020;10:00:00;6;Maintenance;"Weather station;multiparameter;Campbell;WS-A";Cleaning;Aurélien Ballu;
+11.11.2020;10:10:00;7;Maintenance;"Weather station;multiparameter;Campbell;WS-A";Cleaning;Aurélien Ballu;
+15.12.2020;9:45:00;8;Maintenance;"Weather station;multiparameter;Campbell;WS-A";Cleaning;Aurélien Ballu;
+30.12.2020;0:50:00;9;Issue;"Weather station;multiparameter;Campbell;WS-A";LéXPLORE Power down;Sébastien Lavanchy;
+05.01.2021;13:30:00;9;Repair;"Weather station;multiparameter;Campbell;WS-A";LéXPLORE Power ok;Sébastien Lavanchy;
+24.02.2021;0:10:00;10;Issue;"Weather station;multiparameter;Campbell;WS-A";intermittent logging issue;Sebastien Lavanchy;
+10.03.2021;9:00:00;11;Maintenance;"Weather station;multiparameter;Campbell;WS-A";Cleaning;Aurélien Ballu;
+22.03.2021;12:00:00;12;Calibration Factory;"Datalogger;N/A;CR1000X;25713(WS-A)";;Guillaume Cunillera;
+22.04.2021;9:30:00;13;Maintenance;"Weather station;multiparameter;Campbell;WS-A";Cleaning;Aurélien Ballu;
+30.04.2021;16:30:00;10;Repair;"Weather station;multiparameter;Campbell;WS-A";Repair weather station. OK, but we will still change the logger;Philippe Quetin;
+19.07.2021;12:00:00;14;Maintenance;"Weather station;multiparameter;Campbell;WS-A";Cleaning;Philippe Quetin;
+11.08.2021;7:12:00;15;Maintenance;"Weather station;multiparameter;Campbell;WS-A";Cleaning;Sébastien Lavanchy;
+12.08.2021;0:10:00;16;Out of order;"Datalogger;N/A;CR1000;E11421(WS-A)";Datalogger has too many looging issue;Sébastien Lavanchy;
+13.08.2021;18:00:00;16;Installation;"Datalogger;N/A;CR1000X;25713(WS-A)";New CR1000X;Michael Plüss;
+27.10.2021;12:00:00;17;Maintenance;"Weather station;multiparameter;Campbell;WS-A";Cleaning;Guillaume Cunillera;certificate_CR1000X-25713.pdf
+15.12.2021;12:00:00;18;Maintenance;"Weather station;multiparameter;Campbell;WS-A";Cleaning;Guillaume Cunillera;
+12.01.2022;12:00:00;19;Maintenance;"Weather station;multiparameter;Campbell;WS-A";Cleaning;Sébastien Lavanchy;
+10.03.2022;12:00:00;20;Maintenance;"Weather station;multiparameter;Campbell;WS-A";Cleaning;Sébastien Lavanchy;
+03.05.2022;12:00:00;21;Maintenance;"Weather station;multiparameter;Campbell;WS-A";Cleaning;Sébastien Lavanchy;
+10.05.2022;16:00:00;22;Out of order;"tipping bucket raingauge;rainfall;ARG100;164110(WS-A)";end of life;Sébastien Lavanchy;
+10.05.2022;12:00:00;23;Calibration Factory;"Temperature and Relative Humidity;Temperature;EE181-M1A1;22181600193879(WS-B)";;Guillaume Cunillera;
+10.05.2022;12:00:00;23;Calibration Factory;"Temperature and Relative Humidity;Humidity;EE181-M1A1;22181600193879(WS-B)";;Guillaume Cunillera;
+03.06.2022;12:00:00;23;Calibration Factory;"Datalogger;N/A;CR1000X;40347(WS-B)";;Guillaume Cunillera;
+09.06.2022;12:00:00;23;Calibration Factory;"tipping bucket raingauge;rainfall;ARG314;222319(WS-A)";;Guillaume Cunillera;
+22.06.2022;12:00:00;23;Calibration Factory;"tipping bucket raingauge;rainfall;ARG314;222404(WS-B)";calib files in the 20240516 folder : 2024 WS-A.zip;Guillaume Cunillera;
+27.06.2022;12:00:00;23;Calibration Factory;"wind monitor;wind speed;05103;WM193493(WS-B)";;Guillaume Cunillera;
+27.06.2022;12:00:00;23;Calibration Factory;"wind monitor;wind direction;05103;WM193493(WS-B)";;Guillaume Cunillera;
+25.08.2022;16:40:00;24;Maintenance;"Weather station;multiparameter;Campbell;WS-A";Cleaning;Matteo Gios;
+21.09.2022;17:20:00;24;Maintenance;"Weather station;multiparameter;Campbell;WS-A";Cleaning;Philippe Quetin;
+26.10.2022;14:00:00;22;Installation;"tipping bucket raingauge;rainfall;ARG314;222319(WS-A)";new rain gauge, new position (South-West);Guillaume Cunillera;ARG314_SN22319.pdf
+18.11.2022;12:00:00;25;Calibration Factory;"Pyranometer;Solar radiation;CS300 (SP-110);81111(WS-B)";;Guillaume Cunillera;
+25.11.2022;11:00:00;26;Maintenance;"Weather station;multiparameter;Campbell;WS-A";Cleaning;Guillaume Cunillera;
+21.12.2022;10:45:00;26;Maintenance;"Weather station;multiparameter;Campbell;WS-A";Cleaning;Matteo Gios;
+18.01.2023;10:45:00;26;Maintenance;"Weather station;multiparameter;Campbell;WS-A";Cleaning;Matteo Gios;
+01.02.2023;10:00:00;27;Issue;"wind monitor;wind speed;05103;WM150350(WS-A)";there is a slight grinding noise when the propeller turns;Sébastien Lavanchy;
+15.02.2023;14:08:00;28;Maintenance;"Weather station;multiparameter;Campbell;WS-A";Cleaning;Floreana Miesen;
+22.02.2023;9:30:00;29;Recovery/removal;"Weather station;multiparameter;Campbell;WS-A";Out for factory calibration;Sébastien Lavanchy;
+22.02.2023;14:00:00;29;Deployment/reinstalled;"Weather station;multiparameter;Campbell;WS-B";Installation new instrument;Sébastien Lavanchy;
+26.03.2023;14:00:00;30;Maintenance;"Weather station;multiparameter;Campbell;WS-B";Cleaning;Matteo Gios;
+18.04.2023;11:35:00;31;Maintenance;"Weather station;multiparameter;Campbell;WS-B";Cleaning;Matteo Gios;
+24.05.2023;9:00:00;32;Maintenance;"Weather station;multiparameter;Campbell;WS-B";Cleaning;Matteo Gios;
+19.06.2023;12:00:00;33;Maintenance;"Weather station;multiparameter;Campbell;WS-B";Cleanng everything except raingauge;Guillaume Cunillera;
+20.06.2023;13:00:00;34;Maintenance;"tipping bucket raingauge;rainfall;ARG314;222319(WS-A)";Cleaning raingauge;Guillaume Cunillera;
+19.07.2023;9:30:00;35;Maintenance;"Weather station;multiparameter;Campbell;WS-B";cleaning;Guillaume Cunillera;
+17.08.2023;11:00:00;36;Maintenance;"Weather station;multiparameter;Campbell;WS-B";Cleaning;Matteo Gios;
+12.09.2023;13:00:00;37;Maintenance;"Weather station;multiparameter;Campbell;WS-B";cleaning;Matteo Gios;
+17.10.2023;13:00:00;38;Maintenance;"Weather station;multiparameter;Campbell;WS-B";cleaning;Matteo Gios;
+21.11.2023;13:30:00;39;Maintenance;"Weather station;multiparameter;Campbell;WS-B";cleaning;Matteo Gios;
+21.11.2023;13:30:00;39;Maintenance;"tipping bucket raingauge;rainfall;ARG314;222319(WS-A)";cleaning;Matteo Gios;
+16.01.2024;15:00:00;40;Maintenance;"Weather station;multiparameter;Campbell;WS-B";cleaning;Guillaume Cunillera;
+16.01.2024;15:00:00;40;Maintenance;"tipping bucket raingauge;rainfall;ARG314;222319(WS-A)";big ceaning of the filter, feather, dust ,…;Guillaume Cunillera;
+14.02.2024;15:00:00;41;Maintenance;"Weather station;multiparameter;Campbell;WS-B";cleaning;Matteo Gios;
+14.02.2024;15:00:00;41;Maintenance;"tipping bucket raingauge;rainfall;ARG314;222319(WS-A)";cleaning;Matteo Gios;
+06.03.2024;10:00:00;42;Maintenance;"Weather station;multiparameter;Campbell;WS-B";cleaning;Matteo Gios;
+06.03.2024;10:00:00;42;Maintenance;"tipping bucket raingauge;rainfall;ARG314;222319(WS-A)";cleaning;Matteo Gios;
+04.04.2024;12:00:00;43;Calibration Factory;"Pyranometer;Solar radiation;CS300 (SP 110):85941(WS A)";calib files in the 20240516 folder : 2024 WS-A.zip;Campbell Scientific;
+29.04.2024;12:00:00;44;Calibration Factory;"Temperature and Relative Humidity;Temperature;HC2S3-L;0020073077(WS-A)";calib files in the 20240516 folder : 2024 WS-A.zip;Campbell Scientific;
+29.04.2024;12:00:00;45;Calibration Factory;"Temperature and Relative Humidity;Humidity;HC2S3-L;0020073077(WS-A)";calib files in the 20240516 folder : 2024 WS-A.zip;Campbell Scientific;
+01.05.2024;12:00:00;46;Calibration Factory;"Datalogger;N/A;CR1000X;25713(WS-A)";calib files in the 20240516 folder : 2024 WS-A.zip;Campbell Scientific;
+15.05.2024;8:00:00;47;Issue;;Weather station off for the instrument swap;Guillaume Cunillera;
+15.05.2024;9:00:00;47;Recovery/removal;"Temperature and Relative Humidity;Temperature;EE181-M1A1;22181600193879(WS-B)";swap instruments;Guillaume Cunillera;
+15.05.2024;9:00:00;47;Recovery/removal;"Temperature and Relative Humidity;Humidity;EE181-M1A1;22181600193879(WS-B)";swap instruments;Guillaume Cunillera;
+15.05.2024;9:00:00;47;Recovery/removal;"wind monitor;wind speed;05103;WM193493(WS-B)";swap instruments;Guillaume Cunillera;
+15.05.2024;9:00:00;47;Recovery/removal;"wind monitor;wind direction;05103;WM193493(WS-B)";swap instruments;Guillaume Cunillera;
+15.05.2024;9:00:00;47;Recovery/removal;"tipping bucket raingauge;rainfall;ARG314;222319(WS-B)";swap instruments;Guillaume Cunillera;
+15.05.2024;9:00:00;47;Recovery/removal;"Datalogger;N/A;CR1000X;40347(WS-B)";swap instruments;Guillaume Cunillera;
+15.05.2024;9:00:00;47;Out of order;"Pyranometer;Solar radiation;CS300 (SP-110);81111(WS-B)";swap instruments;Guillaume Cunillera;
+16.05.2024;12:00:00;47;Deployment/reinstalled;"Temperature and Relative Humidity;Temperature;HC2S3-L;0020073077(WS-A)";swap instruments;Guillaume Cunillera;
+16.05.2024;12:00:00;47;Deployment/reinstalled;"Temperature and Relative Humidity;Humidity;HC2S3-L;0020073077(WS-A)";swap instruments;Guillaume Cunillera;
+16.05.2024;12:00:00;47;Deployment/reinstalled;"wind monitor;wind speed;05103;WM150350(WS-A)";swap instruments;Guillaume Cunillera;
+16.05.2024;12:00:00;47;Deployment/reinstalled;"wind monitor;wind direction;05103;WM150350(WS-A)";swap instruments;Guillaume Cunillera;
+16.05.2024;12:00:00;47;Deployment/reinstalled;"tipping bucket raingauge;rainfall;ARG314;222404(WS-A)";swap instruments;Guillaume Cunillera;
+16.05.2024;12:00:00;47;Deployment/reinstalled;"Datalogger;N/A;CR1000X;25713(WS-A)";swap instruments;Guillaume Cunillera;
+16.05.2024;12:00:00;47;Installation;"Pyranometer;Solar radiation;CS300 (SP 110):85941(WS A)";swap instruments. New pyranometer;Guillaume Cunillera;
+16.05.2024;14:00:00;47;Repair;"Weather station;multiparameter;Campbell;WS-A";Weather station back ON after instrument swap;Guillaume Cunillera;
+16.05.2024;9:10:00;48;Issue;"Pyranometer;Solar radiation;CS300 (SP 110):85941(WS A)";W/m-2 coefficient written 2 times in the code. Values are 5 times too high.;Guillaume Cunillera;
+31.05.2024;12:30:00;48;Repair;"Pyranometer;Solar radiation;CS300 (SP 110):85941(WS A)";coefficient changed in the code, code sent to datalogger. OK now. Will be corrected on datalakes by James.;Guillaume Cunillera;
+11.06.2024;13:39:00;49;Maintenance;"tipping bucket raingauge;rainfall;ARG314;222404(WS-A)";Cleaning, was clogged: too much dirt inside;Jérémy Keller;
+12.06.2024;12:00:00;49;Maintenance;"Weather station;multiparameter;Campbell;WS-A";cleaning;Guillaume Cunillera;
+10.10.2024;12:00:00;50;Maintenance;"tipping bucket raingauge;rainfall;ARG314;222404(WS-A)";Cleaning, ;Matteo Gios;
+10.10.2024;12:00:00;50;Maintenance;"Weather station;multiparameter;Campbell;WS-A";cleaning;Matteo Gios;
+18.02.2025;12:00:00;51;Maintenance;"tipping bucket raingauge;rainfall;ARG314;222404(WS-A)";Cleaning, ;Matteo Gios;
+18.02.2025;12:00:00;51;Maintenance;"Weather station;multiparameter;Campbell;WS-A";cleaning;Matteo Gios;
+12.03.2025;13:00:00;51;Maintenance;"tipping bucket raingauge;rainfall;ARG314;222404(WS-A)";Cleaning, ;Matteo Gios;
+12.03.2025;13:00:00;51;Maintenance;"Weather station;multiparameter;Campbell;WS-A";cleaning;Matteo Gios;
+25.03.2025;9:30:00;52;Recovery/removal;"Weather station;multiparameter;Campbell;WS-A";swap Datalogger from PC1 to PC1_V2 and Flake program for Datalakes pipeline;Guillaume Cunillera;
+25.03.2025;9:50:00;52;Deployment/reinstalled;"Weather station;multiparameter;Campbell;WS-A";swap Datalogger from PC1 to PC1_V2 and Flake program for Datalakes pipeline;Guillaume Cunillera;
+18.07.2025;12:30:00;53;Maintenance;"tipping bucket raingauge;rainfall;ARG314;222404(WS-A)";cleaning;Guillaume Cunillera;
+29.04.2025;12:00:00;54;Calibration Factory;"Pyranometer;Solar radiation;CS300 (SP 110):88772(WS B)";new one bought 07/25;Guillaume Cunillera;Switchdrive\LéXPLORE_TO_V2\_LéXPLORE Coredata\WeatherStation\Factory calibration\2025 WS-B
+10.07.2025;12:00:00;55;Calibration Factory;"wind monitor;wind speed;05103;WM193493(WS-B)";factory calibration;Guillaume Cunillera;Switchdrive\LéXPLORE_TO_V2\_LéXPLORE Coredata\WeatherStation\Factory calibration\2025 WS-B
+10.07.2025;12:00:00;55;Calibration Factory;"wind monitor;wind direction;05103;WM193493(WS-B)";factory calibration;Guillaume Cunillera;Switchdrive\LéXPLORE_TO_V2\_LéXPLORE Coredata\WeatherStation\Factory calibration\2025 WS-B
+10.07.2025;12:00:00;55;Calibration Factory;"tipping bucket raingauge;rainfall;ARG314;222319(WS-B)";factory calibration;Guillaume Cunillera;Switchdrive\LéXPLORE_TO_V2\_LéXPLORE Coredata\WeatherStation\Factory calibration\2025 WS-B
+10.07.2025;12:00:00;55;Calibration Factory;"Datalogger;N/A;CR1000X;40347(WS-B)";factory calibration;Guillaume Cunillera;Switchdrive\LéXPLORE_TO_V2\_LéXPLORE Coredata\WeatherStation\Factory calibration\2025 WS-B
+11.07.2025;12:00:00;55;Calibration Factory;"Temperature and Relative Humidity;Temperature;EE181-M1A1;22181600193879(WS-B)";factory calibration;Guillaume Cunillera;Switchdrive\LéXPLORE_TO_V2\_LéXPLORE Coredata\WeatherStation\Factory calibration\2025 WS-B
+18.07.2025;12:30:00;56;Maintenance;"Weather station;multiparameter;Campbell;WS-A";cleaning;Guillaume Cunillera;
+12.08.2025;9:00:00;57;Issue;"Weather station;multiparameter;Campbell;WS-A";Weather station off for the instrument swap;Guillaume Cunillera;
+12.08.2025;9:00:00;57;Recovery/removal;"Temperature and Relative Humidity;Temperature;HC2S3-L;0020073077(WS-A)";swap instruments;Guillaume Cunillera;
+12.08.2025;9:00:00;57;Recovery/removal;"Temperature and Relative Humidity;Humidity;HC2S3-L;0020073077(WS-A)";swap instruments;Guillaume Cunillera;
+12.08.2025;9:00:00;57;Recovery/removal;"wind monitor;wind speed;05103;WM150350(WS-A)";swap instruments;Guillaume Cunillera;
+12.08.2025;9:00:00;57;Recovery/removal;"wind monitor;wind direction;05103;WM150350(WS-A)";swap instruments;Guillaume Cunillera;
+12.08.2025;9:00:00;57;Recovery/removal;"tipping bucket raingauge;rainfall;ARG314;222404(WS-A)";swap instruments;Guillaume Cunillera;
+12.08.2025;9:00:00;57;Recovery/removal;"Datalogger;N/A;CR1000X;25713(WS-A)";swap instruments;Guillaume Cunillera;
+12.08.2025;9:00:00;57;Out of order;"Pyranometer;Solar radiation;CS300 (SP 110):85941(WS A)";swap instruments;Guillaume Cunillera;
+12.08.2025;12:00:00;57;Deployment/reinstalled;"Temperature and Relative Humidity;Temperature;EE181-M1A1;22181600193879(WS-B)";swap instruments;Guillaume Cunillera;
+12.08.2025;12:00:00;57;Deployment/reinstalled;"Temperature and Relative Humidity;Humidity;EE181-M1A1;22181600193879(WS-B)";swap instruments;Guillaume Cunillera;
+12.08.2025;12:00:00;57;Deployment/reinstalled;"wind monitor;wind speed;05103;WM193493(WS-B)";swap instruments;Guillaume Cunillera;
+12.08.2025;12:00:00;57;Deployment/reinstalled;"wind monitor;wind direction;05103;WM193493(WS-B)";swap instruments;Guillaume Cunillera;
+12.08.2025;12:00:00;57;Deployment/reinstalled;"tipping bucket raingauge;rainfall;ARG314;222319(WS-B)";swap instruments;Guillaume Cunillera;
+12.08.2025;12:00:00;57;Deployment/reinstalled;"Datalogger;N/A;CR1000X;40347(WS-B)";swap instruments;Guillaume Cunillera;
+12.08.2025;12:00:00;57;Installation;"Pyranometer;Solar radiation;CS300 (SP 110):88772(WS B)";swap instruments. New pyranometer;Guillaume Cunillera;
+12.08.2025;14:00:00;57;Repair;"Weather station;multiparameter;Campbell;WS-B";Weather station back ON after instrument swap;Guillaume Cunillera;
