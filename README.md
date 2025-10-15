@@ -84,6 +84,7 @@ The meteostation is a weather station collecting a wide range of meteorological 
 - Use conda and install the requirements with:
 
  `conda env create -f environment.yml`
+
 ## Usage
 
 ### Credentials
@@ -94,7 +95,10 @@ In order to download live data `creds_example.json` should be renamed to `creds.
 
 To run the pipeline: `python scripts/main.py`
 
-The python script `scripts/main.py` defines the different processing steps while the python script `scripts/meteostation.py` contains the python class meteostation with all the corresponding class methods to process the data. To add a new processing or visualization step, a new class method can be created in the `meteostation.py` file and the step can be added in `main.py` file. Both above mentioned python scripts are independent of the local file system.
+The python script `scripts/main.py` defines the different processing steps while the python script 
+`scripts/instruments.py` contains the instrument classes with all the corresponding class methods to process the data. 
+To add a new processing or visualization step, a new class method can be created in the `instruments.py` file and the 
+step can be added in `main.py` file. Both above-mentioned python scripts are independent of the local file system.
 
 ### Arguments
 
