@@ -77,16 +77,13 @@ The meteostation is a weather station collecting a wide range of meteorological 
 
 - Clone the repository to your local machine using the command: 
 
- `git clone https://renkulab.io/gitlab/lexplore/meteostation.git`
+ `git clone https://github.com/LeXPLORE-Platform/Meteostation.git`
  
  Note that the repository will be copied to your current working directory.
 
-- Use Python 3 and install the requirements with:
+- Use conda and install the requirements with:
 
- `pip install -r requirements.txt`
-
- The python version can be checked by running the command `python --version`. In case python is not installed or only an older version of it, it is recommend to install python through the anaconda distribution which can be downloaded [here](https://www.anaconda.com/products/individual). 
-
+ `conda env create -f environment.yml`
 ## Usage
 
 ### Credentials
