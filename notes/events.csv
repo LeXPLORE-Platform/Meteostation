@@ -1,24 +1,21 @@
 start;stop;parameter;depth;Comments
 20220510 00:00:00;20221026 12:30:00;Rain;;sensor broken
 20221024 12:00:00;20221024 12:30:00;All;;Maintenance
-20250402 10:59:00;20250402 11:01:00;Air Temperature;;3.605�C is an outlier
-20250402 12:49:00;20250402 12:51:00;Relative Humidity;;remove 0.615%
-20221024 12:05:00;20221024 12:50:00;Air Temperature;;Weird values
+20250402 10:59:00;20250402 11:01:00;AirTC;;3.605 degC is an outlier
+20250402 12:49:00;20250402 12:51:00;RH;;remove 0.615%
+20221024 12:05:00;20221024 12:50:00;AirTC;;Weird values
 20241108 09:59:00;20241108 10:01:00;AirTC;;Temperature drops sudddenly
-20241103 21:49:42;20241103 21:51:00;Rain,AirTC;;Temperature drops suddenly
+20241103 21:49:42;20241103 21:51:00;AirTC;;Temperature drops suddenly
 20241026 07:39:00;20241026 07:41:00;AirTC;;Temperature drops
 20240622 08:43:41;20240622 09:30:34;AirTC;;weird temperature drop
 20221026 11:05:00;20221026 11:15:00;Rain;;This value was induced by the manipulation during the installation of a new rain gauge
 20220605 05:40:44;20220605 13:05:04;Rain;;High value (50mm)
 20220622 13:31:33;20220622 22:17:59;Rain;;Very high value- maintenance and sensor broken
 20210126 12:49:00;20210126 12:51:00;RH,AirTC;;Weird drop
-20250912 09:52:41;20250912 09:52:41;Rain;;Rainfall values are 0 for the whole month whereas swiss authorities reported a wet month: https://www.meteosuisse.admin.ch/services-et-publications/publications/rapports-et-bulletins/2016/2020/bulletin-climatologique-aout-2020.html. 
-This other website tells a similar story: https://www.historique-meteo.net/europe/suisse/lausanne/2020/08/
+20200801 00:00:00;20200901 00:00:00;Rain;;Rainfall values are 0 for the whole month whereas swiss authorities reported a wet month: https://www.meteosuisse.admin.ch/services-et-publications/publications/rapports-et-bulletins/2016/2020/bulletin-climatologique-aout-2020.html. This other website tells a similar story: https://www.historique-meteo.net/europe/suisse/lausanne/2020/08/
 20230222 15:09:00;20230222 15:11:00;BP;;Weird drop
 20240611 13:39:00;20240611 13:41:00;BP;;Air pressure drops 
 20240531 14:49:00;20240531 14:51:00;BP;;Air pressure drop
 20240516 11:09:00;20240516 11:11:00;BP;;Air pressure drops
-20240515 11:28:00;20240515 11:32:00;BP;;Air pressure drops
 20230719 10:18:00;20230719 10:22:00;BP;;Air pressure drops
-20221024 12:05:00;20221024 12:50:00;RH,Slrw,Slrm,WS,WindDir,Rain,BP,WindGust;;Weird values
 20221024 12:05:00;20221024 12:50:00;RH,Slrw,Slrm,WS,WindDir,Rain,BP,WindGust;;Weird values

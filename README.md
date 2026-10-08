@@ -140,6 +140,13 @@ The automatic quality check is controlled by the package [Envass](https://pypi.o
 ###  Events 
 
 Maintenance dates, interesting or surprising events, non identified by the quality assurance outliers are listed in the folder `notes/events.csv`.
+These events are applied to the quality flags (`<variable>_qual = 1`) when the data are processed to Level 1. The file is semicolon separated with the columns `start;stop;parameter;depth;comments`:
+
+- `start`, `stop`: UTC, format `YYYYMMDD HH:MM:SS` (inclusive). An empty `stop` means the event is ongoing.
+- `parameter`: `All` or a comma separated list of variable names (e.g. `WS,WindDir,WindGust`).
+- `depth`: not used for this dataset, leave empty (kept for consistency with other LéXPLORE datasets).
+- `comments`: free text description of the event.
+
 Check also the `notes/sensor_history.csv` (if existing)
 
 ## Collaborators

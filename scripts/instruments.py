@@ -53,7 +53,11 @@ class Meteostation(GenericInstrument):
                               "BP", "WindGust"]
             df["time"] = df["time"].apply(
                 lambda x: datetime.timestamp(datetime.strptime(x, '%Y-%m-%d %H:%M:%S').replace(tzinfo=timezone.utc)))
-            df.sort_values(by=['time'])
+            df = df.sort_values(by=['time'], kind="stable")
+            duplicates = df["time"].duplicated(keep="first")
+            if duplicates.any():
+                self.log.warning("Dropping {} duplicate timestamps from {}".format(duplicates.sum(), file), indent=2)
+                df = df[~duplicates]
             for variable in self.variables:
                 self.data[variable] = np.array(df[variable])
         except Exception as e:

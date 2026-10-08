@@ -46,7 +46,8 @@ def main(server=False, logs=False, remove_api_data=False):
         if ".dat" in file:
             sensor = Meteostation(log=log)
             if sensor.read_data(file):
-                sensor.quality_assurance(file_path="notes/quality_assurance.json")
+                sensor.quality_assurance(file_path=os.path.join(repo, "notes/quality_assurance.json"))
+                sensor.apply_events(os.path.join(repo, "notes/events.csv"))
                 edited_files.extend(sensor.export(directories["Level1"], "L1_Meteostation", output_period="weekly"))
     log.end_stage()
 
