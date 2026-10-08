@@ -4,3 +4,4 @@ start;stop;parameter;depth;Comments
 20250402 10:59:00;20250402 11:01:00;Air Temperature;;3.605�C is an outlier
 20250402 12:49:00;20250402 12:51:00;Relative Humidity;;remove 0.615%
 20221024 12:05:00;20221024 12:50:00;Air Temperature;;Weird values
+20241108 09:59:00;20241108 10:01:00;AirTC;;Temperature drops sudddenly
