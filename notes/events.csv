@@ -15,3 +15,4 @@ start;stop;parameter;depth;Comments
 20250912 09:52:41;20250912 09:52:41;Rain;;Rainfall values are 0 for the whole month whereas swiss authorities reported a wet month: https://www.meteosuisse.admin.ch/services-et-publications/publications/rapports-et-bulletins/2016/2020/bulletin-climatologique-aout-2020.html. 
 This other website tells a similar story: https://www.historique-meteo.net/europe/suisse/lausanne/2020/08/
 20230222 15:09:00;20230222 15:11:00;BP;;Weird drop
+20240611 13:39:00;20240611 13:41:00;BP;;Air pressure drops 
