@@ -12,3 +12,5 @@ start;stop;parameter;depth;Comments
 20220605 05:40:44;20220605 13:05:04;Rain;;High value (50mm)
 20220622 13:31:33;20220622 22:17:59;Rain;;Very high value- maintenance and sensor broken
 20210126 12:49:00;20210126 12:51:00;RH,AirTC;;Weird drop
+20250912 09:52:41;20250912 09:52:41;Rain;;Rainfall values are 0 for the whole month whereas swiss authorities reported a wet month: https://www.meteosuisse.admin.ch/services-et-publications/publications/rapports-et-bulletins/2016/2020/bulletin-climatologique-aout-2020.html. 
+This other website tells a similar story: https://www.historique-meteo.net/europe/suisse/lausanne/2020/08/
