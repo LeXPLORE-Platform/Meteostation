@@ -14,3 +14,4 @@ start;stop;parameter;depth;Comments
 20210126 12:49:00;20210126 12:51:00;RH,AirTC;;Weird drop
 20250912 09:52:41;20250912 09:52:41;Rain;;Rainfall values are 0 for the whole month whereas swiss authorities reported a wet month: https://www.meteosuisse.admin.ch/services-et-publications/publications/rapports-et-bulletins/2016/2020/bulletin-climatologique-aout-2020.html. 
 This other website tells a similar story: https://www.historique-meteo.net/europe/suisse/lausanne/2020/08/
+20230222 15:09:00;20230222 15:11:00;BP;;Weird drop
