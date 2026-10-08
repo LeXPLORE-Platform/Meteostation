@@ -6,3 +6,4 @@ start;stop;parameter;depth;Comments
 20221024 12:05:00;20221024 12:50:00;Air Temperature;;Weird values
 20241108 09:59:00;20241108 10:01:00;AirTC;;Temperature drops sudddenly
 20241103 21:49:42;20241103 21:51:00;Rain,AirTC;;Temperature drops suddenly
+20241026 07:39:00;20241026 07:41:00;AirTC;;Temperature drops
